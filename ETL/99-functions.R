@@ -21,6 +21,8 @@ armo_base_panel <- function(anio_0, trimestre_0, anio_1, trimestre_1){
   return(df_eph_panel)
 }
 
+
+######################################################
 preparo_base <- function(df, periodo_base = "t_posterior"){
   
   assertthat::assert_that(periodo_base %in% c("t_anterior", "t_posterior"),
@@ -65,7 +67,6 @@ preparo_base <- function(df, periodo_base = "t_posterior"){
 ### Test
 #test <- preparo_base(df = df_eph_panel, periodo_base = "t_anterior")
 
-
 armo_tabla_sankey <- function(table, categoria){
   
   if(unique(table$periodo_base) == "t_anterior"){
@@ -89,25 +90,44 @@ armo_tabla_sankey <- function(table, categoria){
       mutate(categoria = categoria)
   }
   
+  tabla_sankey <- tabla_sankey |> 
+    mutate(from = stringr::str_replace_all(from, "_tant", "_t0"),
+           to   = stringr::str_replace_all(to, "_tpost", "_t1"))
+  
   return(tabla_sankey)
 }
 
+# 
+# armo_sankey <- function(table){
+#   
+#   if(unique(table$periodo_base) == "t_anterior"){
+#     periodo <- "tant"}
+#   
+#   if(unique(table$periodo_base) == "t_posterior"){
+#     periodo <- "tpost"
+#   }
+#   
+#   names(table) <- c("from", "to", "weight", "id", "periodo_base", "categoria")
+#   
+#   highcharter::hchart(table, "sankey", 
+#          name = "Gender based Outcomes") |> 
+#     highcharter::hc_title(text= glue::glue(
+#       "Población base: {unique(table$categoria)} - {ifelse(periodo == 'tant', 'Trimestre anterior', 'Trimestre posterior')}"))
+#     #hc_subtitle(text= "Población ocupada al trimestre 2 de 2023")
+# 
+# }
 
-armo_sankey <- function(table){
-  
-  if(unique(table$periodo_base) == "t_anterior"){
-    periodo <- "tant"}
-  
-  if(unique(table$periodo_base) == "t_posterior"){
-    periodo <- "tpost"
-  }
-  
-  names(table) <- c("from", "to", "weight", "id", "periodo_base", "categoria")
-  
-  highcharter::hchart(table, "sankey", 
-         name = "Gender based Outcomes") |> 
-    highcharter::hc_title(text= glue::glue(
-      "Población base: {unique(table$categoria)} - {ifelse(periodo == 'tant', 'Trimestre anterior', 'Trimestre posterior')}"))
-    #hc_subtitle(text= "Población ocupada al trimestre 2 de 2023")
 
+### Notas para highcharter
+df_to_annotations_labels <- function(df, xAxis = 0, yAxis = 0) {
+  
+  stopifnot(hasName(df, "x"))
+  stopifnot(hasName(df, "y"))
+  stopifnot(hasName(df, "text"))
+  
+  df %>% 
+    rowwise() %>% 
+    mutate(point = list(list(x = x, y = y, xAxis = 0, yAxis = 0))) %>% 
+    select(-x, -y)  
+  
 }
