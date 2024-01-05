@@ -12,7 +12,16 @@ source("ETL/00-libraries.R")
 # ### Guardo en formato parquet
 # write_parquet(df_eph_2003_2023, "data_raw/df_eph.parquet")
 
+### Tasas del mercado de trabajo
+# df_tasas_mt <- read_parquet("data_raw/df_eph.parquet") |> 
+#   group_by(ANO4, TRIMESTRE) |> 
+#   summarise(pob_total = sum(PONDERA),
+#             pob_ocupada = sum(PONDERA[ESTADO == 1]),
+#             pob_desocupada = sum(PONDERA[ESTADO == 2]),
+#             pob_inactiva = sum(PONDERA[ESTADO == 3]))
+# 
+# write_parquet(df_tasas_mt, "data_output/df_tasas_mt.parquet")
+
 ### Cargo bases
 df_cond_act <- arrow::read_csv_arrow("data_output/panel_cond_act_historico.csv")
-
-
+df_tass_mt <- arrow::read_parquet("data_output/df_tasas_mt.parquet")

@@ -38,8 +38,8 @@ filter_sankey_anio_ant <- selectInput(inputId = "anio_ant",
   # ),
   
 filter_sankey_trim_ant <- selectInput(inputId = "trimestre_ant",
-              label = "Trimestre inicial (del panel)",
-              choices = 1:4,
+              label = "Panel (trimestres consecutivos)",
+              choices = c("1-2" = 1, "2-3" = 2, "3-4" = 3, "4-1" = 4),
               selected = 1
   )
   
