@@ -2,7 +2,7 @@
 #
 # Example R code to install packages if not already installed
 #
-my_packages = c("dplyr", "eph", "shiny", "highcharter", "arrow", "glue", 
+my_packages = c("dplyr", "shiny", "highcharter", "arrow", "glue", 
                 "bslib", "bsicons", "gghighlight", "waiter")
 install_if_missing = function(p) {
   if (p %in% rownames(installed.packages()) == FALSE) {
