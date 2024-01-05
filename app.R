@@ -1,8 +1,23 @@
 
 source("ETL/99-functions.R")
-source("ETL/00-libraries.R")
+#source("ETL/00-libraries.R")
 source("ETL/01-extract.R")
 source("ETL/02-transform.R")
+
+
+### Libraries
+library(dplyr)
+#library(ggplot2)
+library(eph)
+library(shiny)
+library(highcharter)
+library(arrow)
+library(glue)
+library(bslib)
+library(bsicons)
+library(gghighlight)
+library(waiter)
+
 
 waiting_screen <- tagList(
   spin_flower(),
