@@ -25,7 +25,7 @@ df_cond_act <- df_cond_act |>
 
 
 ### ### Filtros para gráfico de flujo
-filter_sankey_anio_ant <- selectInput(inputId = "anio_ant",
+filter_sankey_anio_ant <- selectInput(inputId = "f_anio_ant",
               label = "Año del panel",
               choices = 2003:2023,
               selected = 2022
@@ -37,18 +37,18 @@ filter_sankey_anio_ant <- selectInput(inputId = "anio_ant",
   #             selected = 2021
   # ),
   
-filter_sankey_trim_ant <- selectInput(inputId = "trimestre_ant",
+filter_sankey_trim_ant <- selectInput(inputId = "f_trimestre_ant",
               label = "Panel (trimestres consecutivos)",
               choices = c("1-2" = 1, "2-3" = 2, "3-4" = 3, "4-1" = 4),
               selected = 1
   )
   
-filter_sankey_categoria <- selectInput(inputId = "category",
+filter_sankey_categoria <- selectInput(inputId = "f_category",
               label = "Categoría de base (el 100%)",
               choices = c("Ocupado", "Desocupado", "Inactivo")
   )
   
-filter_sankey_periodo_base <- selectInput(inputId = "periodo_base",
+filter_sankey_periodo_base <- selectInput(inputId = "f_periodo_base",
               label = "Sentido (trimestre base)",
               choices = c("Trimestre anterior" = "t_anterior",
                           "Trimestre posterior" = "t_posterior")
@@ -64,21 +64,21 @@ filters_sankey <- list(
 
 
 ### Filtros para gráfico de línea
-filter_line_desde <-  selectInput(inputId = "desde",
+filter_line_desde <-  selectInput(inputId = "f_desde",
                                   label = "Desde",
-                                  choices = c("Ocupación" = "Ocupado_tant", 
-                                              "Desocupación" = "Desocupado_tant",
-                                              "Inactividad" = "Inactivo_tant"), 
-                                  selected = "Desocupado_tant"
+                                  choices = c("Ocupación" = "Ocupado_t0", 
+                                              "Desocupación" = "Desocupado_t0",
+                                              "Inactividad" = "Inactivo_t0"), 
+                                  selected = "Desocupado_t0"
 )
 
-filter_line_hacia <-   selectInput(inputId = "hacia",
+filter_line_hacia <-   selectInput(inputId = "f_hacia",
                                    label = "Hacia",
                                    #choices = unique(df_cond_act$to),
-                                   choices = c("Ocupación" = "Ocupado_tpost", 
-                                               "Desocupación" = "Desocupado_tpost",
-                                               "Inactividad" = "Inactivo_tpost"),
-                                   selected = "Ocupado_tpost",
+                                   choices = c("Ocupación" = "Ocupado_t1", 
+                                               "Desocupación" = "Desocupado_t1",
+                                               "Inactividad" = "Inactivo_t1"),
+                                   selected = "Ocupado_t1",
                                    multiple = TRUE
 )
 

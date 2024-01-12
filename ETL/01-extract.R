@@ -23,5 +23,5 @@ source("ETL/00-libraries.R")
 # write_parquet(df_tasas_mt, "data_output/df_tasas_mt.parquet")
 
 ### Cargo bases
-df_cond_act <- arrow::read_csv_arrow("data_output/panel_cond_act_historico.csv")
+df_cond_act <- arrow::read_csv_arrow("data_output/panel_cond_act_historico_test.csv")
 df_tass_mt <- arrow::read_parquet("data_output/df_tasas_mt.parquet")

@@ -67,27 +67,27 @@ preparo_base <- function(df, periodo_base = "t_posterior"){
 ### Test
 #test <- preparo_base(df = df_eph_panel, periodo_base = "t_anterior")
 
-armo_tabla_sankey <- function(table, categoria){
+armo_tabla_sankey <- function(table, categoria_t){
   
   if(unique(table$periodo_base) == "t_anterior"){
-    periodo <- "tant"}
+    periodo_t <- "t0"}
   
   if(unique(table$periodo_base) == "t_posterior"){
-    periodo <- "tpost"
+    periodo_t <- "t1"
   }
   
-  names(table) <- c("from", "to", "weight", "id", "periodo_base")
+  names(table) <- c("from", "to", "weight", "id", "periodo_base", "categoria", "periodo")
 
   if(unique(table$periodo_base) == "t_anterior"){
     tabla_sankey <- table |>
-      filter(from == glue::glue("{stringr::str_to_sentence(categoria)}_{periodo}")) |> 
-      mutate(categoria = categoria)
+      filter(from == glue::glue("{stringr::str_to_sentence(categoria_t)}_{periodo_t}")) |> 
+      mutate(categoria = categoria_t)
   }
   
   if(unique(table$periodo_base) == "t_posterior"){
     tabla_sankey <- table |>
-      filter(to == glue::glue("{stringr::str_to_sentence(categoria)}_{periodo}")) |> 
-      mutate(categoria = categoria)
+      filter(to == glue::glue("{stringr::str_to_sentence(categoria_t)}_{periodo_t}")) |> 
+      mutate(categoria = categoria_t)
   }
   
   tabla_sankey <- tabla_sankey |> 
