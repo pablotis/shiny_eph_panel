@@ -67,32 +67,35 @@ preparo_base <- function(df, periodo_base = "t_posterior"){
 ### Test
 #test <- preparo_base(df = df_eph_panel, periodo_base = "t_anterior")
 
-armo_tabla_sankey <- function(table, categoria_t){
+armo_tabla_sankey <- function(table, categoria){
   
   if(unique(table$periodo_base) == "t_anterior"){
-    periodo_t <- "t0"}
+    periodo <- "tant"}
   
   if(unique(table$periodo_base) == "t_posterior"){
-    periodo_t <- "t1"
+    periodo <- "tpost"
   }
   
-  names(table) <- c("from", "to", "weight", "id", "periodo_base", "categoria", "periodo")
+  names(table) <- c("from", "to", "weight", "id", "periodo_base")
 
   if(unique(table$periodo_base) == "t_anterior"){
     tabla_sankey <- table |>
-      filter(from == glue::glue("{stringr::str_to_sentence(categoria_t)}_{periodo_t}")) |> 
-      mutate(categoria = categoria_t)
+      filter(from == glue::glue("{stringr::str_to_sentence(categoria)}_{periodo}")) |> 
+      mutate(categoria = categoria)
   }
   
   if(unique(table$periodo_base) == "t_posterior"){
     tabla_sankey <- table |>
-      filter(to == glue::glue("{stringr::str_to_sentence(categoria_t)}_{periodo_t}")) |> 
-      mutate(categoria = categoria_t)
+      filter(to == glue::glue("{stringr::str_to_sentence(categoria)}_{periodo}")) |> 
+      mutate(categoria = categoria)
   }
   
   tabla_sankey <- tabla_sankey |> 
-    mutate(from = stringr::str_replace_all(from, "_tant", "_t0"),
-           to   = stringr::str_replace_all(to, "_tpost", "_t1"))
+    mutate(
+      across(c("from", "to", "id"), \(x) stringr::str_replace_all(x, "_tant", "_t0")),
+      across(c("from", "to", "id"), \(x) stringr::str_replace_all(x, "_tpost", "_t1")))
+        # from = stringr::str_replace_all(from, "_tant", "_t0"),
+        #    to   = stringr::str_replace_all(to, "_tpost", "_t1"))
   
   return(tabla_sankey)
 }

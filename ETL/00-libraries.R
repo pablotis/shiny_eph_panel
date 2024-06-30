@@ -1,7 +1,7 @@
 
 ### Libraries
 library(dplyr)
-#library(ggplot2)
+library(ggplot2)
 library(eph)
 library(shiny)
 library(highcharter)
@@ -11,3 +11,5 @@ library(bslib)
 library(bsicons)
 library(gghighlight)
 library(waiter)
+library(thematic)
+library(ragg)

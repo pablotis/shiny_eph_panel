@@ -21,7 +21,7 @@ df_etiqueta <- df_cond_act |>
 df1_p <- df_to_annotations_labels(df_etiqueta)
 
 hchart(df_cond_act |> 
-         filter(from == "Desocupado_tant", to == "Desocupado_tpost"),
+         filter(from == "Desocupado_t0", to == "Desocupado_t1"),
        "line", 
        hcaes(periodo, weight, group = to))  |> 
   hc_add_theme(hc_theme_538()) |> 
@@ -59,10 +59,12 @@ library(gghighlight)
 library(ggplot2)
 
 df_cond_act |> 
-  filter(from == "Desocupado_tant") |> 
+  filter(from == "Desocupado_t0") |> 
   ggplot() +
   geom_line(aes(x = periodo, y = weight, colour = to, group = to)) +
-  gghighlight(to == "Desocupado_tpost", line_label_type = "sec_axis") +
+  gghighlight(to == "Desocupado_t1", line_label_type = "text_path") +
   #facet_wrap(facets = "to") +
   theme_minimal() +
   theme(axis.text.y.right = element_text(size = 50))
+
+

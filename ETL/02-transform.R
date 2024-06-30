@@ -25,46 +25,46 @@ df_cond_act <- df_cond_act |>
 
 
 ### ### Filtros para gráfico de flujo
-filter_sankey_anio_ant <- selectInput(inputId = "f_anio_ant",
-              label = "Año del panel",
-              choices = 2003:2023,
-              selected = 2022
-  )
+filter_sankey_anio_ant <- selectInput(inputId = "anio_ant",
+                                      label = "Año del panel",
+                                      choices = 2003:2023,
+                                      selected = 2023
+)
 
-  # selectInput(inputId = "anio_post",
-  #             label = "Año 1",
-  #             choices = 2021:2022,
-  #             selected = 2021
-  # ),
-  
-filter_sankey_trim_ant <- selectInput(inputId = "f_trimestre_ant",
-              label = "Panel (trimestres consecutivos)",
-              choices = c("1-2" = 1, "2-3" = 2, "3-4" = 3, "4-1" = 4),
-              selected = 1
-  )
-  
-filter_sankey_categoria <- selectInput(inputId = "f_category",
-              label = "Categoría de base (el 100%)",
-              choices = c("Ocupado", "Desocupado", "Inactivo")
-  )
-  
-filter_sankey_periodo_base <- selectInput(inputId = "f_periodo_base",
-              label = "Sentido (trimestre base)",
-              choices = c("Trimestre anterior" = "t_anterior",
-                          "Trimestre posterior" = "t_posterior")
-  )
+# selectInput(inputId = "anio_post",
+#             label = "Año 1",
+#             choices = 2021:2022,
+#             selected = 2021
+# ),
+
+filter_sankey_trim_ant <- selectInput(inputId = "trimestre_ant",
+                                      label = "Panel (trimestres consecutivos)",
+                                      choices = c("1-2" = 1, "2-3" = 2, "3-4" = 3, "4-1" = 4),
+                                      selected = 1
+)
+
+filter_sankey_categoria <- selectInput(inputId = "category",
+                                       label = "Categoría de base (el 100%)",
+                                       choices = c("Ocupado", "Desocupado", "Inactivo")
+)
+
+filter_sankey_periodo_base <- selectInput(inputId = "periodo_base",
+                                          label = "Sentido (trimestre base)",
+                                          choices = c("Trimestre anterior" = "t_anterior",
+                                                      "Trimestre posterior" = "t_posterior")
+)
 
 
 filters_sankey <- list(
- filter_sankey_anio_ant,
- filter_sankey_categoria,
- filter_sankey_periodo_base,
- filter_sankey_trim_ant
+  filter_sankey_anio_ant,
+  filter_sankey_categoria,
+  filter_sankey_periodo_base,
+  filter_sankey_trim_ant
 )
 
 
 ### Filtros para gráfico de línea
-filter_line_desde <-  selectInput(inputId = "f_desde",
+filter_line_desde <-  selectInput(inputId = "desde",
                                   label = "Desde",
                                   choices = c("Ocupación" = "Ocupado_t0", 
                                               "Desocupación" = "Desocupado_t0",
@@ -72,7 +72,7 @@ filter_line_desde <-  selectInput(inputId = "f_desde",
                                   selected = "Desocupado_t0"
 )
 
-filter_line_hacia <-   selectInput(inputId = "f_hacia",
+filter_line_hacia <-   selectInput(inputId = "hacia",
                                    label = "Hacia",
                                    #choices = unique(df_cond_act$to),
                                    choices = c("Ocupación" = "Ocupado_t1", 
